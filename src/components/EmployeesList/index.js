@@ -1,11 +1,17 @@
 import React from "react";
-import { DeleteEmployeeButton, EmployeesTable, EmployeesTBody, EmployeesTHead, UpdateEmployeeButton } from "./styles";
+import { DeleteEmployeeButton, EmployeesTable, EmployeesTBody, EmployeesTHead, LoadingContainer, UpdateEmployeeButton } from "./styles";
 import DeleteIcon from "../../assets/icons/person_remove_black_24dp.svg";
 import UpdateIcon from "../../assets/icons/manage_accounts_black_24dp.svg";
-
+import Loader from "react-loader-spinner";
+import * as Variables from '../../styles/_variables';
 
 function EmployeesList() {
-    return (
+
+    return true     
+        ? <LoadingContainer>
+            <Loader color={Variables.BLUE_POOL}></Loader>
+        </LoadingContainer> 
+        : (
         <EmployeesTable>
             <EmployeesTHead>
                 <tr>

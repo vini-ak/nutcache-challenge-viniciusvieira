@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import * as Variables from '../../styles/_variables';
 
+export const LoadingContainer = styled.div`
+    margin: 12vh auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const EmployeesTable = styled.table`
     border: none;
     width: 100%;

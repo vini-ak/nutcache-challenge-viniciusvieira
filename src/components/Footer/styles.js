@@ -3,7 +3,7 @@ import * as Variables from '../../styles/_variables';
 
 export const FooterContent = styled.footer`
     width: 100vw;
-    position: relative;
+    position: absolute;
     bottom: 0;
     left: 0;
     background-color: ${Variables.RED};
