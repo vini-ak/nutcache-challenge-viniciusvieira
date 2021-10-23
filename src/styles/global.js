@@ -5,13 +5,16 @@ import * as Fonts from "./_fonts";
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
-        font-family: Raleway;
-        src: url(${Fonts.RALEWAY}) format('ttf');
+        font-family: 'Raleway';
+        src: url(${Fonts.RALEWAY}) format('truetype');
+        font-style: normal;
+        font-weight: 400;
     }
 
     html, body {
         margin: 0;
         overflow-x: hidden;
+        background-color: ${Variables.WHITE};
     }
 
     * {
@@ -20,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         transition: color 0.3s ease;
         transition: background-color 0.3s ease;
-        font-family: Raleway, sans-serif;
+        font-family: 'Raleway', sans-serif;
     }
 
 `;

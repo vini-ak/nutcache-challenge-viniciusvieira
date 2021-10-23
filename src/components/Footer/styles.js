@@ -3,7 +3,7 @@ import * as Variables from '../../styles/_variables';
 
 export const FooterContent = styled.footer`
     width: 100vw;
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     background-color: ${Variables.RED};
@@ -11,5 +11,5 @@ export const FooterContent = styled.footer`
     font-size: 1rem;
     text-align: center;
     font-weight: 500;
-    color: ${Variables.GREY};
+    color: ${Variables.WHITE};
 `;

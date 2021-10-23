@@ -5,6 +5,7 @@ export const HeaderBackground = styled.div`
     width: 100vw;
     background-color: ${Variables.BLUE_POOL};
     height: 20vh;
+    min-height: 200px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -27,7 +28,7 @@ export const CreateEmployeeButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 12px 40px;
+    padding: 8px 30px;
     width: 15rem;
     transition-timing-function: ease-out;
     transition-duration: .2s;
@@ -47,5 +48,6 @@ export const CreateEmployeeButton = styled.button`
 
     &:hover {
         background-color: ${Variables.SECONDAY_BLUE};
+        cursor: pointer;
     }
 `;
