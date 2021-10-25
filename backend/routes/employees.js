@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 
-const ENDPOINT = '7522265a2c6741b7bae8de112169cfb0';
+const ENDPOINT = 'a6fd6bce4a144c76bfb36a1123112f5a';
 const baseRoute = `https://crudcrud.com/api/${ENDPOINT}/nutemployees`;
 
 /*
@@ -39,7 +39,7 @@ router.get('/:id', async function(req, res, next) {
 /*
  * DELETE EMPLOYEE 
  */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', async function(req, res, next) {
   try {
     let id = req.params.id;
 

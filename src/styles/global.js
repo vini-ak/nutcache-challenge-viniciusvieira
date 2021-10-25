@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         background-color: ${Variables.WHITE};
         min-height: 100vh;
+        height: 100%;
     }
 
     * {

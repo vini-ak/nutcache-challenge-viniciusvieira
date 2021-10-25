@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import * as Variables from '../../styles/_variables';
 
 export const LoadingContainer = styled.div`
@@ -17,6 +17,7 @@ export const EmployeesTable = styled.table`
 `;
 
 export const EmployeesTHead = styled.thead`
+
     & > tr {
         border: none;
         text-align: left;
