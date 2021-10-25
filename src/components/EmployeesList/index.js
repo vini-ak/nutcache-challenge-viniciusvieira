@@ -8,12 +8,17 @@ import { ApiService } from "../../data/api";
 import { Utils } from "../../utils";
 import DeleteModal from "../_dialogs/DeleteModal";
 import NotFoundView from "../NotFound/index";
+import EmployeeModal from "../_dialogs/EmployeeModal";
+import { EmployeeEntity } from "../../domain/entities/employee-entity";
 
 function EmployeesList() {
+    const [employee, setEmployee] = useState(null);
     const [employees, setList] = useState(null);
     const [foundData, setFoundData] = useState(false);
-    const [deleteModalIsOpen, setIsOpen] = useState(false);
-    const [employee, setEmployee] = useState(null);
+
+    // Dialogs
+    const [deleteModalIsOpen, setDeleteIsOpen] = useState(false);
+    const [employeeModalIsOpen, setEmployeeIsOpen] = useState(false);
 
     const api = ApiService.getInstance();
 
@@ -34,21 +39,34 @@ function EmployeesList() {
         await _getEmployeesList();
     }
 
+    /*
+     * Delete modal dialog methods
+     */
     const openDeleteModal = (employee) => {
         setEmployee(employee);
-        setIsOpen(true);
+        setDeleteIsOpen(true);
     }
 
-    const afterCloseModal = async () => await _rebuildEmployeesList();
+    const afterCloseDeleteModal = async () => await _rebuildEmployeesList();
     
-    const closeModal = () => {
-        setIsOpen(false);
+    const closeDeleteModal = () => {
+        setDeleteIsOpen(false);
     }
 
     async function deleteEmployee() {
-        debugger;
-        await api.deleteEmployee(employee._id).then((result) => closeModal());
+        await api.deleteEmployee(employee._id).then((result) => closeDeleteModal());
     }
+
+
+    /*
+     *  Employees dialog methods 
+     */
+    const openEmployeeModal = (employee) => {
+        setEmployee(employee);
+        setEmployeeIsOpen(true);
+    };
+
+    const closeEmployeeModal = () => setEmployeeIsOpen(false);
 
     return !employees
         ? <LoadingContainer>
@@ -78,7 +96,7 @@ function EmployeesList() {
                                 <td>{ Utils.getTeam(employee.team) }</td>
                                 <td>
                                     <DeleteEmployeeButton onClick={() => openDeleteModal(employee)}><img src={DeleteIcon} /></DeleteEmployeeButton>
-                                    <UpdateEmployeeButton><img src={UpdateIcon} /></UpdateEmployeeButton>
+                                    <UpdateEmployeeButton onClick={() => openEmployeeModal(employee)}><img src={UpdateIcon} /></UpdateEmployeeButton>
                                 </td>
                             </tr>
                         );
@@ -89,10 +107,17 @@ function EmployeesList() {
             <DeleteModal 
                 isOpen={deleteModalIsOpen} 
                 employee={employee} 
-                onRequestClose={closeModal}
+                onRequestClose={closeDeleteModal}
                 onDelete={ async () => await deleteEmployee() }
-                onAfterClose={ async () => await afterCloseModal() }
+                onAfterClose={ async () => await afterCloseDeleteModal() }
             ></DeleteModal>
+
+            <EmployeeModal
+                isOpen={employeeModalIsOpen}
+                employee={employee}
+                onRequestClose={closeEmployeeModal}
+                
+            ></EmployeeModal>
 
         </EmployeesTable>
 

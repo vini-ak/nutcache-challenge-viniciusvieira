@@ -1,3 +1,4 @@
+import { Gender } from "../domain/types/gender-type";
 import { TeamType } from "../domain/types/team-type";
 
 export class Utils {
@@ -21,5 +22,18 @@ export class Utils {
 
     static padLeft(value) {
         return value.toString().padStart(2, '0');
+    }
+
+    static getGenderOptions(gender) {
+        switch (gender) {
+            case Gender.FEMALE:
+                return "Female";
+            case Gender.MALE:
+                return "Male";
+            case Gender.NON_BINARY:
+                return "Non-binary";
+            default:
+                return "Prefer not to say";
+        }
     }
 }

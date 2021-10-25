@@ -1,5 +1,5 @@
 export class EmployeeEntity {
-    constructor(name, birth_date, gender, email, cpf, start_date, { team, _id }) {
+    constructor(name, birth_date, gender, email, cpf, start_date, team, _id ) {
         this.name = name;
         this.birth_date = birth_date;
         this.gender = gender;

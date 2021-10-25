@@ -15,7 +15,6 @@ const customStyles = {
   };
 
 function DeleteModal(props) {
-
     return (
         <ReactModal 
             style={customStyles} 
