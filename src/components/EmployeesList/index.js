@@ -17,29 +17,37 @@ function EmployeesList() {
 
     const api = ApiService.getInstance();
 
-    useEffect(() => {
+    useEffect(() => _getEmployeesList(), []);
+
+    function _getEmployeesList() {
         api.getAll().then((response) => {
-            debugger;
             if(Array.isArray(response)) setFoundData(true);
             setList(response);
-        }).catch((e) => console.error(e))
+        }).catch((e) => {
+            // When some connection error happens it must show the NotFoundView component
+            setList([]);
+        });
+    }
+    
+    async function _rebuildEmployeesList() {
+        setList(null);
+        await _getEmployeesList();
+    }
 
-    }, []);
-
-    const openModal = (employee) => {
-        console.log("abrindo modal")
+    const openDeleteModal = (employee) => {
         setEmployee(employee);
         setIsOpen(true);
     }
+
+    const afterCloseModal = async () => await _rebuildEmployeesList();
     
-    
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-    }
-    
-    function closeModal() {
+    const closeModal = () => {
         setIsOpen(false);
+    }
+
+    async function deleteEmployee() {
+        debugger;
+        await api.deleteEmployee(employee._id).then((result) => closeModal());
     }
 
     return !employees
@@ -69,7 +77,7 @@ function EmployeesList() {
                                 <td>{ Utils.formatDate(employee.start_date) }</td>
                                 <td>{ Utils.getTeam(employee.team) }</td>
                                 <td>
-                                    <DeleteEmployeeButton onClick={() => openModal(employee)}><img src={DeleteIcon} /></DeleteEmployeeButton>
+                                    <DeleteEmployeeButton onClick={() => openDeleteModal(employee)}><img src={DeleteIcon} /></DeleteEmployeeButton>
                                     <UpdateEmployeeButton><img src={UpdateIcon} /></UpdateEmployeeButton>
                                 </td>
                             </tr>
@@ -78,7 +86,14 @@ function EmployeesList() {
                 }
             </EmployeesTBody>
 
-            <DeleteModal isOpen={deleteModalIsOpen} emplo></DeleteModal>
+            <DeleteModal 
+                isOpen={deleteModalIsOpen} 
+                employee={employee} 
+                onRequestClose={closeModal}
+                onDelete={ async () => await deleteEmployee() }
+                onAfterClose={ async () => await afterCloseModal() }
+            ></DeleteModal>
+
         </EmployeesTable>
 
     );

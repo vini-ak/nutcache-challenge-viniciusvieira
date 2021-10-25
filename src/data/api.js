@@ -38,4 +38,10 @@ export class ApiService {
         return !response.data ? null : response.data;
     }
 
+    async deleteEmployee(id) {
+        let response = await this.api.delete(`/${id}`).then((response) => response);
+        debugger;
+        return !response.data ? null : response.data;
+    }
+
 }

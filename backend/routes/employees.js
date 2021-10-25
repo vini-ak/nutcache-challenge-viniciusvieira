@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 
-const ENDPOINT = 'a6fd6bce4a144c76bfb36a1123112f5a';
+const ENDPOINT = '6c9b9b42dcce4080a04e2c2225f46cef';
 const baseRoute = `https://crudcrud.com/api/${ENDPOINT}/nutemployees`;
 
 /*

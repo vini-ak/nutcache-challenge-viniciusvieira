@@ -40,8 +40,6 @@ export const CancelButton = styled.button`
     padding: .5rem 3rem;
 
     &:hover {
-        /* background-color: ${Variables.RED};
-        color: ${Variables.WHITE}; */
         cursor: pointer;
     }
 `;
@@ -55,4 +53,8 @@ export const DeleteButton = styled.button`
     font-weight: bold;
     padding: .5rem 3rem;
     margin-left: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
