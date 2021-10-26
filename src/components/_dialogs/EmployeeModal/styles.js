@@ -36,7 +36,7 @@ export const InputContainer = styled.div`
 
     & input, & select {
         width: 100%;
-        padding: .25rem;
+        padding: .5rem .75rem;
         font-size: 1rem;
     }
 

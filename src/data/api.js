@@ -38,6 +38,17 @@ export class ApiService {
         return !response.data ? null : response.data;
     }
 
+    async updateEmployee(body) {
+        debugger;
+        const id = body._id;
+        delete body._id;
+
+
+        let response = await this.api.put(`/${id}`, body).then(response => response);
+        debugger;
+        return !response.data ? null : response.data;
+    }
+
     async deleteEmployee(id) {
         let response = await this.api.delete(`/${id}`).then((response) => response);
         return !response.data ? null : response.data;

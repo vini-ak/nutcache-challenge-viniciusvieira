@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 
-const ENDPOINT = 'ac34b84e9dfc401ba33289d822e98b9c';
+const ENDPOINT = 'b9c61db117e7474191bbebd30affc675';
 const baseRoute = `https://crudcrud.com/api/${ENDPOINT}/nutemployees`;
 
 /*
@@ -51,5 +51,33 @@ router.delete('/:id', async function(req, res, next) {
     console.error("GG", err);
   }
 });
+
+/*
+ * CREATE EMPLOYEE
+ */
+router.post('/', async function(req, res, next) {
+  try {
+    await axios.post(baseRoute, req.body)
+      .then(response => res.send(response.data))
+      .catch(error => res.send(error))
+  } catch(e) {
+    console.error("GG", err);
+  }
+})
+
+/*
+ * UPDATE EMPLOYEE
+ */
+router.put('/:id', async function(req, res, next) {
+  try {
+    let id = req.params.id;
+
+    await axios.put(`${baseRoute}/${id}`, req.body)
+      .then(response => res.send(response.data))
+      .catch(error => res.send(error))
+  } catch(e) {
+    console.error("GG", e);
+  }
+})
 
 module.exports = router;

@@ -116,7 +116,7 @@ function EmployeesList() {
                 isOpen={employeeModalIsOpen}
                 employee={employee}
                 onRequestClose={closeEmployeeModal}
-                
+                onAfterOpen={() => setEmployee(undefined)}
             ></EmployeeModal>
 
         </EmployeesTable>
