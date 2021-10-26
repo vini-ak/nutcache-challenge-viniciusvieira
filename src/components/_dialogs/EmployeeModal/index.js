@@ -7,8 +7,6 @@ import { TeamType } from "../../../domain/types/team-type";
 import { Utils } from "../../../utils";
 import { ButtonsContainer, CancelButton, EmployeeButton, EmployeeDialogContainer, InputContainer } from "./styles";
 
-var axios = require("axios");
-
 const customStyles = {
     content: {
       top: '50%',
@@ -19,21 +17,17 @@ const customStyles = {
       transform: 'translate(-50%, -50%)',
     },
   };
+
 function EmployeeModal(props) {
-    let state = props.employee !== undefined ? props.employee : new EmployeeEntity();
-    const [employee, setEmployee] = useState(state);
+    const [employee, setEmployee] = useState(props.employee !== undefined ? props.employee : new EmployeeEntity());
 
     const api = ApiService.getInstance();
 
-    
-    function initModal() {
-        let value = props.employee !== undefined  ? props.employee : new EmployeeEntity();
-        () => setEmployee(value);
+    useEffect(() => initModal(), []);
 
-        debugger;
-        employee;
+    const updateEmployeeState = (employee) =>  {
+        setEmployee(employee);
     }
-
     
     // Fields controllers
     const [name, setName] = useState(props.employee ? props.employee.name : "");
@@ -42,7 +36,39 @@ function EmployeeModal(props) {
     const [email, setEmail] = useState(props.employee ? props.employee.email : "");
     const [cpf, setCpf] = useState(props.employee ? props.employee.cpf : "");
     const [start_date, setStartDate] = useState(props.employee ? props.employee.start_date : "");
-    const [team, setTeam] = useState();
+    const [team, setTeam] = useState(props.employee ? props.employee.team : undefined);
+
+    function initModal() {
+        let propsValue = props.employee;
+        let value = propsValue !== undefined  ? propsValue : new EmployeeEntity();
+
+        if(value) {
+            employee.name = value.name;
+            employee.birth_date = value.birth_date;
+            employee.gender = value.gender;
+            employee.email = value.email;
+            employee.cpf = value.cpf;
+            employee.start_date = value.start_date;
+            employee.team = value.team;
+            employee._id = value._id;
+        }
+
+        updateEmployeeState({...employee});
+
+        employee;
+
+        if(value && value.name !== undefined) {
+            setName(value.name);
+            setBirthDate(value.birth_date);
+            setGender(value.gender);
+            setEmail(value.email);
+            setCpf(value.cpf);
+            setStartDate(value.start_date);
+            setTeam(value.team);
+        }
+        debugger;
+    }
+
     
     async function onSubmit() {
         employee.name = name;
